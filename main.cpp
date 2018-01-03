@@ -18,8 +18,6 @@ void addRandomLink (long n, int step, int steps, bool debug, string filename, st
 
     bool exists = false;
 
-    int len;
-
     if (debug)
         cout << endl << "[DEBUG] Creating a link ..." << endl;
 
@@ -45,7 +43,6 @@ void addRandomLink (long n, int step, int steps, bool debug, string filename, st
 
     target_line = to_string(node_1) + " " + to_string(node_2);
     target_line_reverse = to_string(node_2) + " " + to_string(node_1);
-    len = target_line.length();
 
     if (debug){
         cout << "[DEBUG] target line: " << target_line << endl;
@@ -56,7 +53,7 @@ void addRandomLink (long n, int step, int steps, bool debug, string filename, st
         exists = false;
         //cout << "LINE: " << line << endl;
 
-        if (line.find(target_line.c_str(), 0, len) != string::npos || line.find(target_line_reverse.c_str(), 0, len) != string::npos ){
+        if (line.compare(target_line) == 0 || line.compare(target_line_reverse) == 0 ){
             exists = true;
             if (debug)
                 cout << "[DEBUG] the link exists" << endl;
@@ -81,7 +78,6 @@ void addRandomLink (long n, int step, int steps, bool debug, string filename, st
 
         target_line = to_string(node_1) + " " + to_string(node_2);
         target_line_reverse = to_string(node_2) + " " + to_string(node_1);
-        len = target_line.length();
 
         if (debug){
             cout << "[DEBUG] target line: " << target_line << endl;
@@ -89,7 +85,7 @@ void addRandomLink (long n, int step, int steps, bool debug, string filename, st
         }
 
         while (getline(tmp_graph, line)) {
-            if (line.find(target_line.c_str(), 0, len) != string::npos  || line.find(target_line_reverse.c_str(), 0, len) != string::npos){
+            if (line.compare(target_line) == 0 || line.compare(target_line_reverse) == 0 ){
                 exists = true;
             }
         }
@@ -146,9 +142,6 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
 
     bool exists = false;
 
-    int len;
-
-
     if (debug)
         cout << endl << "[DEBUG] Deleting a link ..." << endl;
 
@@ -174,7 +167,6 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
 
     target_line = to_string(node_1) + " " + to_string(node_2);
     target_line_reverse = to_string(node_2) + " " + to_string(node_1);
-    len = target_line.length();
 
     if (debug) {
         cout << "[DEBUG] target line: " << target_line << endl;
@@ -182,7 +174,7 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
     }
 
     while (getline(tmp_graph, line)) {
-        if (line.find(target_line.c_str(), 0, len) != string::npos || line.find(target_line_reverse.c_str(), 0, len) != string::npos){
+        if (line.compare(target_line) == 0 || line.compare(target_line_reverse) == 0 ){
             exists = true;
         }
     }
@@ -204,7 +196,6 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
 
         target_line = to_string(node_1) + " " + to_string(node_2);
         target_line_reverse = to_string(node_2) + " " + to_string(node_1);
-        len = target_line.length();
 
         if (debug) {
             cout << "[DEBUG] target line: " << target_line << endl;
@@ -212,7 +203,7 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
         }
 
         while (getline(tmp_graph, line)) {
-            if (line.find(target_line.c_str(), 0, len) != string::npos || line.find(target_line_reverse.c_str(), 0, len) != string::npos){
+            if (line.compare(target_line) == 0 || line.compare(target_line_reverse) == 0 ){
                 exists = true;
                 break;
             }
@@ -242,10 +233,10 @@ void removeRandomLink (long n, int step, int steps, bool debug, string filename,
     }
 
     while (getline(tmp_graph, line)) {
-        if (line.find(target_line.c_str(), 0, len) != string::npos || line.find(target_line_reverse.c_str(), 0, len) != string::npos){
+        if (line.compare(target_line) == 0 || line.compare(target_line_reverse) == 0 ){
             graph << node_1 << " " << node_2 << " " << steps-step+1 << " D\n";
         }
-        if (line.find(target_line.c_str(), 0, len) == string::npos && line.find(target_line_reverse.c_str(), 0, len) == string::npos){
+        if (line.compare(target_line) != 0 && line.compare(target_line_reverse) != 0 ){
             log_tmp_graph << line << endl;
         }
     }
